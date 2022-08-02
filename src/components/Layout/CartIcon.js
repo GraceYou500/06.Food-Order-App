@@ -1,5 +1,3 @@
-import classes from './HeaderCartButton.module.css';
-
 const CartIcon = () => {
   return (
     <svg
