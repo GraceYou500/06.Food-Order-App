@@ -14,6 +14,7 @@ const MealItemForm = props => {
     const enteredAmountNumber = +enteredAmount;
     // + will convert the string number to the number number.
 
+    console.log('add amount of meal', enteredAmountNumber);
     if (
       enteredAmount.trim().length === 0 ||
       enteredAmountNumber < 1 ||
@@ -22,7 +23,7 @@ const MealItemForm = props => {
       setAmountIsValid(false);
       return;
     }
-
+    console.log('+Add submitHandler', enteredAmountNumber);
     props.onAddToCart(enteredAmountNumber);
   };
 

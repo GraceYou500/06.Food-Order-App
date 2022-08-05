@@ -8,12 +8,10 @@ const defaultCartState = {
 
 const cartReducer = (state, action) => {
   if (action.type === 'ADD') {
-    const updatedTotalAmount =
-      state.totalAmount + action.item.price * action.item.amount;
+    const { item } = action;
+    const updatedTotalAmount = state.totalAmount + item.price * item.amount;
 
-    const existingCartItemIndex = state.items.findIndex(
-      item => item.id === action.item.id
-    ); // will return the index if the item is existed.
+    const existingCartItemIndex = state.items.findIndex(i => i.id === item.id); // will return the index if the item is existed.
 
     const existingCartItem = state.items[existingCartItemIndex];
 
@@ -22,12 +20,12 @@ const cartReducer = (state, action) => {
     if (existingCartItem) {
       const updatedItem = {
         ...existingCartItem,
-        amount: existingCartItem.amount + action.item.amount,
+        amount: existingCartItem.amount + item.amount,
       };
       updatedItems = [...state.items];
       updatedItems[existingCartItemIndex] = updatedItem;
     } else {
-      updatedItems = state.items.concat(action.item);
+      updatedItems = state.items.concat(item);
     }
 
     return {
@@ -66,7 +64,8 @@ const CartProvider = props => {
   );
 
   const addItemhandler = item => {
-    dispatchCartAction({ type: 'ADD', item: item });
+    console.log('addItemhandler', item);
+    dispatchCartAction({ type: 'ADD', item: item }); // item parameter is from MealItem-addToCartHandler-cartCtx.addItem()
   };
 
   const removeItemHandler = id => {

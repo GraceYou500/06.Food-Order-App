@@ -16,6 +16,7 @@ const Cart = props => {
   };
 
   const cartItemAddHandler = item => {
+    console.log();
     cartCtx.addItem({ ...item, amount: 1 });
   };
 
